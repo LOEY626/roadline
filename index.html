@@ -1,0 +1,262 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Routebook">
+<link rel="manifest" href="manifest.json">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project North — Loey's Digital Routebook</title>
+<!-- Leaflet CSS -->
+<link rel="stylesheet" href="lib/leaflet.css" />
+<!-- Chart.js -->
+<script src="lib/chart.umd.min.js"></script>
+<!-- Leaflet JS -->
+<script src="lib/leaflet.js"></script>
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 192 192%27%3E%3Crect width=%27192%27 height=%27192%27 rx=%2732%27 fill=%27%230a0a0f%27/%3E%3Cpath d=%27M96 40L40 80v72h40v-40h32v40h40V80z%27 fill=%27%23ff2d78%27/%3E%3Ccircle cx=%2796%27 cy=%2772%27 r=%2712%27 fill=%27%2300f0ff%27/%3E%3C/svg%3E">
+<!-- Main Styles -->
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<!-- ===== BOTTOM NAV (Mobile) ===== -->
+<nav class="bottom-nav" id="bottomNav">
+  <a href="#hero" class="nav-item active" data-section="hero">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    <span>首页</span>
+  </a>
+  <a href="#overview" class="nav-item" data-section="overview">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+    <span>路线</span>
+  </a>
+  <a href="#map" class="nav-item" data-section="map">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 6v16l7-4 8 4 7-4V2l-7 4-8-4-7 4z"/><path d="M8 2v16"/><path d="M16 6v16"/></svg>
+    <span>地图</span>
+  </a>
+  <a href="#itinerary" class="nav-item" data-section="itinerary">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+    <span>行程</span>
+  </a>
+  <a href="#gear" class="nav-item" data-section="gear">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+    <span>装备</span>
+  </a>
+  <a href="#safety" class="nav-item" data-section="safety">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    <span>安全</span>
+  </a>
+</nav>
+<!-- ===== HERO ===== -->
+<section class="hero" id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-geo">
+    <div class="geo"></div>
+    <div class="geo"></div>
+    <div class="geo"></div>
+  </div>
+  <div class="hero-glitch">
+    <div class="hero-glitch-line"></div>
+    <div class="hero-glitch-line"></div>
+    <div class="hero-glitch-line"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-label">Project North</div>
+    <h1 class="hero-title">Loey's Digital<br>Routebook</h1>
+    <p class="hero-subtitle">重庆北碚 → 四川 → 甘肃 → 兰州七里河</p>
+    <div class="hero-meta">
+      <span>14 Days</span>
+      <span class="dot">·</span>
+      <span>约350km</span>
+      <span class="dot">·</span>
+      <span>Solo Walk</span>
+    </div>
+    <p class="hero-tagline">你可以做到！！</p>
+    <a href="#overview" class="hero-btn">Start the Journey</a>
+  </div>
+</section>
+<!-- ===== ROUTE OVERVIEW ===== -->
+<section class="section" id="overview">
+  <div class="section-inner">
+    <h2 class="section-title">Route Overview</h2>
+    <p class="section-subtitle">路线总览</p>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+        <div class="stat-value" data-count="14">0</div>
+        <div class="stat-label">总天数</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+        <div class="stat-value" data-count="350">0</div>
+        <div class="stat-label">总徒步距离 (km)</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+        <div class="stat-value" data-count="11">0</div>
+        <div class="stat-label">徒步日</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 1v3"/><path d="M15 1v3"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <div class="stat-value" data-count="3">0</div>
+        <div class="stat-label">交通接驳日</div>
+      </div>
+    </div>
+    <div class="overview-cards">
+      <div class="overview-card"><div class="overview-card-label">出发地</div><div class="overview-card-value">重庆市北碚区兼善中学附近</div></div>
+      <div class="overview-card"><div class="overview-card-label">终点</div><div class="overview-card-value">兰州市七里河区</div></div>
+      <div class="overview-card"><div class="overview-card-label">每日徒步距离</div><div class="overview-card-value">25–40km / 天</div></div>
+      <div class="overview-card"><div class="overview-card-label">路线策略</div><div class="overview-card-value">分段徒步 + 公共交通接驳，沿低密度区域、国道/省道/乡道，避开长隧道，天黑前住宿</div></div>
+    </div>
+    <div class="disclaimer-banner">
+      <strong>⚠ 重要声明</strong>
+      <p>本路线为规划示意，不构成安全出行建议。实际出行前必须使用高德地图、百度地图、天气平台、住宿平台和当地交通信息逐日核验路线、住宿、隧道、施工、天气、补给与安全条件。</p>
+    </div>
+  </div>
+</section>
+<!-- ===== INTERACTIVE MAP ===== -->
+<section class="section map-section" id="map">
+  <div class="section-inner">
+    <h2 class="section-title">Interactive Map</h2>
+    <p class="section-subtitle">交互地图</p>
+  </div>
+  <div class="map-container" id="mapContainer">
+    <div id="routeMap"></div>
+  </div>
+</section>
+<!-- ===== DAILY ITINERARY ===== -->
+<section class="section" id="itinerary">
+  <div class="section-inner">
+    <h2 class="section-title">Daily Itinerary</h2>
+    <p class="section-subtitle">每日行程</p>
+    <div class="progress-bar-wrapper">
+      <div class="progress-stats">
+        <span id="progressCompleted">0</span>% 完成 ·
+        <span id="progressCompletedKm">0</span>km 已走 ·
+        <span id="progressRemainingKm">350</span>km 剩余
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" id="progressFill" style="width:0%"></div>
+      </div>
+      <div class="progress-milestones">
+        <span data-pct="0" class="active">重庆出发</span>
+        <span data-pct="25">重庆段完成</span>
+        <span data-pct="35">接驳四川</span>
+        <span data-pct="60">四川段完成</span>
+        <span data-pct="70">接驳甘肃</span>
+        <span data-pct="100">兰州抵达</span>
+      </div>
+    </div>
+    <div class="itinerary-list" id="itineraryList"></div>
+  </div>
+</section>
+<!-- ===== DATA VISUALIZATION ===== -->
+<section class="section" id="charts">
+  <div class="section-inner">
+    <h2 class="section-title">Data Visualization</h2>
+    <p class="section-subtitle">数据可视化</p>
+    <div class="chart-grid">
+      <div class="chart-card"><h3 class="chart-title">每日徒步距离</h3><div class="chart-wrapper"><canvas id="distChart"></canvas></div></div>
+      <div class="chart-card"><h3 class="chart-title">每日累计进度</h3><div class="chart-wrapper"><canvas id="cumChart"></canvas></div></div>
+      <div class="chart-card"><h3 class="chart-title">徒步 vs 交通日比例</h3><div class="chart-wrapper chart-wrapper-sm"><canvas id="pieChart"></canvas></div></div>
+      <div class="chart-card"><h3 class="chart-title">预计海拔变化曲线</h3><div class="chart-wrapper"><canvas id="elevChart"></canvas></div></div>
+    </div>
+    <p class="chart-note">海拔和爬升数据为示意，实际应以 GPS、高德、两步路、Strava 或运动手表数据为准。</p>
+  </div>
+</section>
+<!-- ===== PHOTOGRAPHY LOG ===== -->
+<section class="section" id="photography">
+  <div class="section-inner">
+    <h2 class="section-title">Photography Log</h2>
+    <p class="section-subtitle">摄影记录</p>
+    <div class="photo-equipment">
+      <h3>携带设备</h3>
+      <div class="equipment-tags">
+        <span>DJI Air 3S (1电池)</span>
+        <span>DJI Action 4</span>
+        <span>DJI Pocket 3</span>
+        <span>手机</span>
+        <span>Dazz</span>
+        <span>Blackmagic Cam</span>
+      </div>
+    </div>
+    <div class="photo-grid" id="photoGrid"></div>
+  </div>
+</section>
+<!-- ===== GEAR CHECKLIST ===== -->
+<section class="section" id="gear">
+  <div class="section-inner">
+    <h2 class="section-title">Gear Checklist</h2>
+    <p class="section-subtitle">装备清单</p>
+    <div class="gear-container" id="gearContainer"></div>
+    <div class="gear-note gear-warning">
+      <strong>⚠ 重量提醒</strong>
+      <p>30L主背包 + 10L设备包负重较高，每天应检查肩颈、腰、膝盖、脚掌状态。如果出现持续疼痛，应缩短行程或改乘公共交通。</p>
+    </div>
+    <div class="gear-note gear-tip">
+      <strong>💡 轻量化建议</strong>
+      <p>公共交通接驳日前，优先整理摄影设备、电源、证件、药品和当天必需品。</p>
+    </div>
+  </div>
+</section>
+<!-- ===== FOOD PLAN ===== -->
+<section class="section" id="food">
+  <div class="section-inner">
+    <h2 class="section-title">Food Plan</h2>
+    <p class="section-subtitle">路餐计划</p>
+    <div class="food-grid">
+      <div class="food-card"><h3>🥛 早餐</h3><p>便利店采购：牛奶、面包、鸡蛋。每天出发前补充能量。</p></div>
+      <div class="food-card"><h3>🥪 午餐（路餐）</h3><p>馒头、压缩饼干、鸡胸肉、卤牛肉、能量胶、坚果。边走边补给。</p></div>
+      <div class="food-card"><h3>🍜 晚餐</h3><p>到达住宿地后吃热食。县城小馆、面馆、盖饭均可。</p></div>
+      <div class="food-card"><h3>⚡ 必备补给</h3><p>电解质冲剂、盐丸、葡萄糖饮品、巧克力、混合坚果。每日随身携带。</p></div>
+    </div>
+    <div class="food-reminder"><p>⚠ 不建议夜间露营，优先住正规住宿。每天天黑前必须到达住宿点。</p></div>
+  </div>
+</section>
+<!-- ===== SAFETY ===== -->
+<section class="section" id="safety">
+  <div class="section-inner">
+    <h2 class="section-title">Safety Guide</h2>
+    <p class="section-subtitle">安全指南</p>
+    <div class="safety-list">
+      <div class="safety-item"><div class="safety-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><p>女生独行避免夜路，<strong>天黑前必须到达住宿地</strong></p></div>
+      <div class="safety-item"><div class="safety-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div><p>不走高速、不走长隧道、不走封闭施工道路</p></div>
+      <div class="safety-item"><div class="safety-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><p>不在偏僻路段天黑后继续行走，不在人群过密区域长时间停留</p></div>
+      <div class="safety-item"><div class="safety-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><p>每天出发前确认当天住宿点，每天至少给朋友或家人发送一次定位</p></div>
+      <div class="safety-item"><div class="safety-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div><p>遇到无住宿、长隧道、施工、恶劣天气时，必须改乘公共交通</p></div>
+      <div class="safety-item"><div class="safety-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div><p>无人机飞行前确认禁飞区，不在城市核心区、机场、铁路、军事或敏感区域附近飞行</p></div>
+      <div class="safety-item"><div class="safety-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><p><strong>路线完成优先级低于安全</strong>，不要为了完成计划硬走</p></div>
+    </div>
+  </div>
+</section>
+<!-- ===== SUMMARY ===== -->
+<section class="section summary-section" id="summary">
+  <div class="section-inner">
+    <h2 class="section-title summary-title">你可以做到！！</h2>
+    <div class="summary-content">
+      <p>这不是一场为了证明什么的徒步，而是一次把自己交还给路、风、城市和山河的练习。</p>
+      <p>从重庆北碚出发，经过四川与甘肃的分段行走，再抵达兰州七里河。每天的距离、天气、住宿、补给、摄影和风险都被记录下来，形成一本属于 Loey 的数字路书。</p>
+      <p>14天，约350公里，三个省份，一种节奏。</p>
+      <p class="summary-footer">向北走，慢慢走。</p>
+    </div>
+    <div class="summary-route-line">
+      <span class="route-dot start"></span>
+      <span class="route-line-bar"></span>
+      <span class="route-dot mid"></span>
+      <span class="route-line-bar"></span>
+      <span class="route-dot end"></span>
+      <div class="route-labels">
+        <span>重庆</span>
+        <span>四川</span>
+        <span>兰州</span>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ===== BACK TO TOP ===== -->
+<button class="back-to-top" id="backToTop" aria-label="返回顶部">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg>
+</button>
+<script src="script.js"></script>
+</body>
+</html>
