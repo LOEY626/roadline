@@ -1,0 +1,6 @@
+﻿*.py
+*.bak
+*.zip
+.agents
+.DS_Store
+Thumbs.db
