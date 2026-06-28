@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Project North — Loey's Digital Routebook
  * Interactive route data, map, charts, gear checklist, and scroll animations
  *
@@ -1089,10 +1089,10 @@ document.addEventListener('DOMContentLoaded', () => {
   animateCounters();
 
   // Init map (needs container to exist)
-  initMap();
+  try { initMap(); } catch(e) { console.warn('Map init failed:', e); }
 
   // Charts (after canvases exist)
-  initCharts();
+  try { initCharts(); } catch(e) { console.warn('Charts init failed:', e); }
 
   // GPS trail animation
   setTimeout(initGpsAnimation, 500);
@@ -1104,3 +1104,4 @@ document.addEventListener('DOMContentLoaded', () => {
   initBottomNav();
   initNavHide();
 });
+

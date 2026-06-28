@@ -1,4 +1,4 @@
-/* ============================================
+﻿/* ============================================
    Project North — Loey's Digital Routebook
    Style: Acid Surreal — Dark neon, glass-morphism, spatial data viz
    ============================================ */
@@ -196,6 +196,8 @@ hr{border:none;border-top:1px solid rgba(255,255,255,0.04);margin:40px 0}
 
 
 /* === MOBILE FIRST OVERRIDES === */
+@media(max-width:480px){.day-card,.chart-card,.photo-card{opacity:1!important;transform:none!important}}
+
 @media(max-width:480px){
   /* Hero */
   .hero{min-height:92vh;padding:24px 16px}
@@ -334,3 +336,4 @@ hr{border:none;border-top:1px solid rgba(255,255,255,0.04);margin:40px 0}
   .bottom-nav{padding-bottom:max(6px,env(safe-area-inset-bottom))!important}
   .section{padding-left:max(16px,env(safe-area-inset-left));padding-right:max(16px,env(safe-area-inset-right))}
 }
+
